@@ -1,4 +1,4 @@
---1
+-- Task 1: Return month name from date
 CREATE FUNCTION getMonth(@date DATE)
 	RETURNS NVARCHAR(20)
 AS
@@ -9,7 +9,7 @@ END
 GO
 SELECT dbo.getMonth('2003-07-10')
 
---2
+-- Task 2: Return values between two numbers
 CREATE FUNCTION numbersBetween(@x INT , @y INT)
 	RETURNS @t TABLE (col1 INT)
 AS
@@ -28,7 +28,7 @@ DROP FUNCTION numbersBetween
 GO
 SELECT * FROM numbersBetween(1,5);
 
---3
+-- Task 3: Get department and full student name by student id
 CREATE FUNCTION getDeptName(@sNo INT)
 	RETURNS TABLE
 AS
@@ -43,7 +43,7 @@ AS
 GO
 SELECT * FROM getDeptName(1)
 
---4
+-- Task 4: Return null-state log for student names
 CREATE FUNCTION getLog(@sId INT)
 	RETURNS VARCHAR(50)
 AS
@@ -67,7 +67,7 @@ END
 GO
 SELECT dbo.getLog(1)
 
--- 5
+-- Task 5: Return department manager information
 CREATE FUNCTION dbo.getInfo(@mgrId INT)
 RETURNS TABLE
 AS
@@ -87,7 +87,7 @@ RETURN
 GO
 SELECT * FROM dbo.getInfo(1)
 
---6
+-- Task 6: Return requested student name format
 CREATE FUNCTION dbo.GetStudentName(@type NVARCHAR(20))
 
 RETURNS @t TABLE(StudentName NVARCHAR(100))
@@ -120,11 +120,11 @@ GO
 SELECT * FROM dbo.GetStudentName('first name');
 
 
---7
+-- Task 7: Show first name without final character
 SELECT  St_Id AS StudentNo,SUBSTRING(St_Fname, 1, LEN(St_Fname) - 1) 
 FROM Student;
 
---8
+-- Task 8: Delete student course rows by department
 DELETE c
 FROM Stud_Course c
 JOIN Student s
