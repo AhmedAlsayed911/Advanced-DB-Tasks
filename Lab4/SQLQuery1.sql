@@ -1,4 +1,4 @@
---1
+-- Task 1: Procedure for counting students per department
 ALTER PROC NumberOfStudentsPerDept
 AS
 BEGIN
@@ -10,7 +10,7 @@ END
 NumberOfStudentsPerDept
 
 
---2
+-- Task 2: Procedure to check employees count in project
 CREATE PROC CheckNumberOfEmloyees @p1 VARCHAR(50)
 AS
 BEGIN
@@ -39,7 +39,7 @@ END
 CheckNumberOfEmloyees @p1 = 'AL Solimaniah'
 
 
---3
+-- Task 3: Replace employee assignment in project
 CREATE PROC ReplaceEmployeeInProject  @OldEmpNo INT, @NewEmpNo INT, @ProjectNo INT
 AS
 BEGIN
@@ -51,7 +51,7 @@ END
 ReplaceEmployeeInProject @OldEmpNo = 112233 , @NewEmpNo = 102660 , @ProjectNo = 100
 
 
---4
+-- Task 4: Audit project budget updates with trigger
 ALTER TABLE Project ADD Budget INT 
 UPDATE Project SET Budget = 1000
 WHERE Budget is NULL
@@ -84,14 +84,14 @@ UPDATE Project SET Budget = 2000 WHERE Pname = 'AL Solimaniah'
 SELECT * FROM Audit
 
 
---5
+-- Task 5: Prevent insertion into department table
 CREATE TRIGGER PreventInserting 
 ON Department
 INSTEAD OF INSERT
 AS
 	 SELECT 'Cannott insert a new Record in this table'
 
---6
+-- Task 6: Block employee insertion during March
 ALTER TRIGGER PreventInsertionInMarch
 ON Employee
 INSTEAD OF INSERT 
@@ -107,7 +107,7 @@ AS
 	END
 
 
---7
+-- Task 7: Log student inserts into audit table
 CREATE TABLE StudentAudit
 (
 	UserName VARCHAR(50),
@@ -129,7 +129,7 @@ BEGIN
     FROM INSERTED i;
 END;
 
---8
+-- Task 8: Log attempted student deletes
 CREATE TRIGGER StudentLogger
 ON Student
 INSTEAD OF DELETE 
