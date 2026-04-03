@@ -1,4 +1,4 @@
---1
+-- Task 1: Create and configure Department domain constraints
 CREATE TABLE Department
 (
 	DeptNo int PRIMARY KEY,
@@ -28,7 +28,7 @@ insert into Department values (2,'IT','CA')
 insert into Department values (2,'IT','KW')
 
 
---3
+-- Task 3: Create Employee table and enforce salary/business rules
 CREATE TABLE Employee
 (
 	EmpNo INT PRIMARY KEY,
@@ -57,7 +57,7 @@ INSERT INTO Works_For (EmpNo, ProjectNo, Job) VALUES (11111, 2, 'Employee');
 ALTER TABLE Employee ADD TelephoneNumber varchar(15);
 ALTER TABLE Employee DROP COLUMN TelephoneNumber
 
---2
+-- Task 2: Move tables to schemas
 CREATE SCHEMA Company
 
 ALTER SCHEMA Company TRANSFER dbo.Department
@@ -65,7 +65,7 @@ ALTER SCHEMA Company TRANSFER dbo.Department
 CREATE SCHEMA HumanResouces
 ALTER SCHEMA HumanResouces TRANSFER dbo.Employee
 
---4
+-- Task 4: Create synonym and test access paths
 CREATE SYNONYM emp FOR [MyDB].[HumanResouces].Employee
 
 SELECT * FROM Employee
@@ -74,21 +74,21 @@ SELECT * FROM emp
 SELECT * FROM [HumanResouces].emp
 
 
---5
+-- Task 5: Update project budget for manager assignment
 UPDATE Company.Project
 SET p.Budget = p.Budget * 1.10
 FROM Company.Project p , Works_on w
 WHERE p.ProjectNo = w.ProjectNo AND w.EmpNo = 10102 AND w.Job = 'Manager';
 
 
---6
+-- Task 6: Rename department based on employee name
 UPDATE D SET D.DeptName = 'Sales'
 from [Company].Department D
 JOIN emp E
 	on D.DeptNo = E.DeptNo
 WHERE E.Fname = 'James'
 
---7
+-- Task 7: Update enter date for department project members
 UPDATE W
 SET W.Enter_Date = '2007-12-12'
 FROM Works_For W
@@ -99,7 +99,7 @@ JOIN [Company].Department D
 WHERE W.ProjectNo = 1
   AND D.DeptName = 'Sales';
 
---8
+-- Task 8: Delete assignments for department location
 DELETE W
 FROM Works_For W
 JOIN emp E
@@ -109,7 +109,7 @@ JOIN [Company].Department D
 WHERE D.Location = 'KW';
 
 
---9
+-- Task 9: Show login and transfer database ownership
 SELECT SYSTEM_USER AS CurrentLogin;
 ALTER AUTHORIZATION 
 ON DATABASE::MyDB 
