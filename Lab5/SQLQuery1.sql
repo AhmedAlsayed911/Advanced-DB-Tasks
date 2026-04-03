@@ -1,4 +1,4 @@
---1
+-- Task 1: Cursor-based conditional salary updates
 DECLARE cur1 CURSOR
 FOR SELECT Fname , Salary FROM Employee
 FOR UPDATE
@@ -26,7 +26,7 @@ CLOSE cur1
 DEALLOCATE cur1
 
 
---2
+-- Task 2: Cursor to list department and manager names
 DECLARE cur2 CURSOR
 FOR SELECT Dname , Fname FROM Employee e JOIN Departments d ON e.SSN = d.MGRSSN
 FOR READ ONLY
@@ -45,7 +45,7 @@ CLOSE cur2
 DEALLOCATE cur2
 
 
---3
+-- Task 3: Cursor to concatenate employee names
 DECLARE cur3 CURSOR
 FOR SELECT Fname FROM Employee
 FOR READ ONLY
@@ -65,7 +65,7 @@ CLOSE cur3
 DEALLOCATE cur3
 
 
---4
+-- Task 4: Sequence for project insert values
 CREATE SEQUENCE s1
 START WITH 1
 INCREMENT BY 1
@@ -75,7 +75,7 @@ NO CYCLE
 
 INSERT INTO Project VALUES ('DB' , NEXT VALUE FOR s1 , 'ZAG' , 'ZAG' , 30 , 1500)
 
---5 
+-- Task 5: Create and query database snapshot
 /*SELECT name, physical_name
 FROM sys.database_files
 WHERE type_desc = 'ROWS';*/
@@ -92,7 +92,7 @@ USE Company_SD_Snap
 SELECT * FROM Employee
 
 
---6.1
+-- Task 6.1: Stored procedure version of getMonth
 CREATE PROC getMonth @date DATE
 AS
 	SELECT MONTH(@date)
@@ -100,7 +100,7 @@ AS
 getMonth @date = '2003-07-10'
 
 
---6.2
+-- Task 6.2: Stored procedure version of numbersBetween
 ALTER PROC numbersBetween  @n1 INT , @n2 INT
 AS
 BEGIN
@@ -116,7 +116,7 @@ END
 numbersBetween 1, 5 
 
 
---6.3
+-- Task 6.3: Stored procedure version of getDeptName
 CREATE PROC getDeptName @sId INT
 AS
 BEGIN
@@ -131,7 +131,7 @@ BEGIN
 END
 
 
---6.4
+-- Task 6.4: Stored procedure version of getLog
 CREATE PROC getLog @Id INT
 AS
 BEGIN
@@ -152,7 +152,7 @@ BEGIN
 END
 
 
---6.5
+-- Task 6.5: Stored procedure version of getInfo
 CREATE PROC getInfo @mgrId INT
 AS
 BEGIN
@@ -171,7 +171,7 @@ BEGIN
 	SELECT * FROM @t1
 END
 
---6.6
+-- Task 6.6: Stored procedure version of getStudentName
 CREATE PROC getStudentName @type VARCHAR(50)
 AS
 BEGIN
