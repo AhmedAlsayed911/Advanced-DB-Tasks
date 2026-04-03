@@ -1,5 +1,5 @@
 use ITI
---1--
+-- Task 1: Create passing students view
 create view vstudent
 as
 select s.St_Fname+' '+s.St_Lname as FullName , c.Crs_Name , sc.Grade
@@ -12,7 +12,7 @@ select * from vstudent
 
 
 
---2-Create an Encrypted view that displays manager names and the topics they teach
+-- Task 2: Create encrypted manager-topic view
 
 create view vmgr_topic
 with encryption
@@ -28,7 +28,7 @@ where i.Ins_id in (select Dept_manager from Department)
 
 
 
---3-Create a view that will display Instructor Name, Department Name for the ‘SD’ or ‘Java’ Department.
+-- Task 3: Create instructor view for SD and Java departments
 create view vinstructor 
 as
 select Ins_Name,Dept_Name
@@ -42,7 +42,7 @@ select * from vinstructor
 
 
 
---4Create a view “V1” that displays student data for student who lives in Alex or Cairo
+-- Task 4: Create student view for Cairo/Alex with check option
 use ITI
 create view cairo_or_alex
 as 
@@ -52,7 +52,7 @@ or St_Address='Alex' with check option;
 
 --
 Use Company_SD
---5Create a view that will display the project name and the number of employees who work on it. “Use SD database”
+-- Task 5: Create project aggregation view in Company_SD
 create view vproject
 as
 select p.ProjectName, sum(EmpNo) as NumOfEmps
@@ -63,17 +63,17 @@ group by p.ProjectName
 select * from vproject
 
 
---6 --
+-- Task 6: Create clustered index on manager hire date
 use ITI
 create clustered index hd_idx on Department(Manager_hiredate)
 --error
 
---7
+-- Task 7: Create unique nonclustered index on student age
 
 create unique nonclustered index age_idx on Student(St_age)
 --error
 
---8  Using MERGE statement between the following two tables [User ID, Transaction Amount]
+-- Task 8: Merge daily transactions into last transactions
 create database New_DB
 use New_DB
 
